@@ -42,5 +42,3 @@ function solution(num1, num2) {
 ## #8
 
 [코딩테스트 연습 - 배열 두 배 만들기](https://school.programmers.co.kr/learn/courses/30/lessons/120809)
-
-[프로그래머스](https://school.programmers.co.kr/learn/courses/30/lessons/120809/solution_groups?language=javascript)
