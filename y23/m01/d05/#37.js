@@ -7,6 +7,7 @@ function solution(dot) {
     if (dot[1] > 0) return 2;
     if (dot[1] < 0) return 3;
   }
+  
 }
 
 // function solution(dot) {
