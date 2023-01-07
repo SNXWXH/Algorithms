@@ -1,0 +1,8 @@
+function solution(numbers, k) {
+  let ball = 1;
+  for (let i = 0; i < k - 1; i++) {
+    ball += 2;
+    if (ball > numbers.length - 1) ball -= numbers.length;
+  }
+  return ball;
+}
