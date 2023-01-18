@@ -60,3 +60,12 @@ function solution(order) {
 toLowerCase() → 소문자변환
 
 </aside>
+
+```jsx
+const str = "Hello, World, JavaScript";
+
+const upperCaseStr = str.toUpperCase();
+console.log(upperCaseStr);
+
+//HELLO, WORLD, JAVASCRIPT
+```
