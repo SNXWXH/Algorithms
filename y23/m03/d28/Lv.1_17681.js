@@ -20,6 +20,7 @@ function solution(n, arr1, arr2) {
         ("0".repeat(n - e.toString(2).length) + e.toString(2)).split("")
       );
   });
+
   //두 개를 비교하면서 둘 중에 하나라고 1이라면 map에 #으로 바꾸기
   for (let i = 0; i < arr1.length; i++) {
     for (let j = 0; j < n; j++) {
