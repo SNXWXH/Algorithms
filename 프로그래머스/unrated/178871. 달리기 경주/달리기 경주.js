@@ -9,5 +9,5 @@ function solution(players, callings) {
         obj[callings[i]]--;
         obj[player]++;
     }
-    return Object.entries(players).map((v)=> v[1])
+    return players;
 }
