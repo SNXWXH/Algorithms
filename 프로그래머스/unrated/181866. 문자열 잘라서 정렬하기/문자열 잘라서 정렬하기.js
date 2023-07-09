@@ -1,1 +1,1 @@
-const solution = myString => myString.replace(/x/g, ' ').trim("").split(/\s+/g).sort();
+const solution = myString => myString.replace(/x+/g, ' ').trim("").split(" ").sort();
