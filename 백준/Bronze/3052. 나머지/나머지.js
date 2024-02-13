@@ -1,18 +1,8 @@
-const file = process.platform === "linux" ? 0 : "./input.txt";
+const file = process.platform === 'linux' ? 0 : './input.txt';
+const input = require('fs').readFileSync(file).toString().trim().split('\n');
 
-const input = require("fs")
-  .readFileSync(file)
-  .toString()
-  .trim()
-  .split("\n")
-  .map((el) => Number(el));
+let rest = [];
+input.map((n) => rest.push(n % 42));
 
-let array = [];
-
-for (i = 0; i <= 9; i++) array.push(input[i] % 42);
-
-let set = new Set(array);
-
-let answer = [...set];
-
-console.log(answer.length);
+let ans = [...new Set(rest)].length;
+console.log(ans);
