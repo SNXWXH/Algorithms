@@ -1,24 +1,16 @@
-const file = process.platform === "linux" ? 0 : "./input.txt";
+const file = process.platform === 'linux' ? 0 : './input.txt';
+const input = require('fs').readFileSync(file).toString().trim().split('\n');
 
-const input = require("fs").readFileSync(file).toString().trim().split("\n");
+let ans = [];
 
-let N = Number(input[0]);
+input.map((v) => {
+  const arr = v.split(' ').map(Number);
+  const sum = arr.slice(1).reduce((sum, current) => sum + current, 0);
+  const avg = sum / (arr.length - 1);
+  const student = arr.slice(1).filter((score) => score > avg).length;
 
-for (let i = 1; i <= N; i++) {
-  let sum = 0;
-  let count = 0;
+  const studentAvg = ((student / (arr.length - 1)) * 100).toFixed(3);
+  ans.push(studentAvg + '%');
+});
 
-  let scores = input[i].split(" ").map(Number);
-  let n = scores[0];
-
-  for (let j = 1; j <= n; j++) {
-    sum += scores[j];
-  }
-  let avg = sum / n;
-  for (let k = 1; k <= n; k++) {
-    if (scores[k] > avg) {
-      count++;
-    }
-  }
-  console.log(((count / n) * 100).toFixed(3) + "%");
-}
+console.log(ans.slice(1).join('\n'));
