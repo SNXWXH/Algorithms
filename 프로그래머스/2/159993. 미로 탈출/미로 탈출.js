@@ -1,40 +1,75 @@
-const solution = (maps) => {
-    // 상하좌우 순서
-    const dx = [0, 0, -1, 1];
-    const dy = [-1, 1, 0, 0];
-    let start = [0, 0];
+function solution(maps) {
+    const [row, column] = [maps.length, maps[0].length];
+    // 레버까지 이동하기 위한 배열
+    const lArr = Array.from(Array(row), (e) => Array(column).fill(0));
+    
+    // 출구까지 이동하기 위한 배열
+    const eArr = Array.from(Array(row), (e) => Array(column).fill(0));
+    
+    // 상 우 하 좌로 이동하기 위한 배열[y,x]
+    const position = [[1,0],[0,1],[-1,0],[0,-1]];
+    
+    let need = []; //큐
+    
+    // 레버와 출구, 시작 위치
+    let l = [];
+    let e = [];
+    let s = [];
+    
+    // 레버와 출구의 도착 유무
+    let isL = false;
+    let isE = false;
+    
+    // 시작 위치, 레버 위치, 출구 위치 저장
+    maps.forEach((v,i) => {
+        if(v.includes("S")) s.push(i,v.indexOf("S")); // 0,0
+        if(v.includes("L")) l.push(i,v.indexOf("L")); // 0,4
+        if(v.includes("E")) e.push(i,v.indexOf("E")); // 4,4
+    })
+     
+    // 시작 위치에 1을 저장
+    lArr[s[0]][s[1]] = 1;
+    need.push(s)
+    while((!isL || !isE) && need.length){
+        // [row, column] 현재 좌표
+        const [r, c] = need.shift();
+        // 레버를 당기기 위함
+        if(!isL){
+            for(let i = 0; i < 4; i++){
+                const [newR, newC] = [r+position[i][0], c+position[i][1]];
+                if(newR < 0 || newC < 0 || newR >= row || newC >= column) continue;
+                if(!lArr[newR][newC] && maps[newR][newC] !== "X"){
+                    // 이전 위치 값에서 1을 더해줌으로써 해당 위치까지의 거리를 알 수 있음
+                    lArr[newR][newC] = lArr[r][c] + 1;
+                    need.push([newR, newC]);
+                }
 
-    // 시작위치 찾기
-    for (let i = 0; i < maps.length; i++) {
-        for (let j = 0; j < maps[0].length; j++) {
-            if (maps[i][j] === 'S') start = [j, i];
-        }
-    }
-
-    const dp = [...new Array(maps.length)].map(_ => [...new Array(maps[0].length)].fill(0));
-    const queue = [[...start, false, 0]];
-    dp[start[1]][start[0]]++;
-
-    while (queue.length) {
-        const [x, y, laver, cnt] = queue.shift();
-
-        for (let k = 0; k < 4; k++) {
-            const [nx, ny] = [x + dx[k], y + dy[k]];
-
-            // 경계 체크 및 장애물 확인
-            if (0 <= nx && nx < maps[0].length && 0 <= ny && ny < maps.length && maps[ny][nx] !== 'X') {
-                // 레버 사용한 상태에서 E에 도달하면 결과 반환
-                if (laver && maps[ny][nx] === 'E') return cnt + 1;
-                // 이미 방문한 경우
-                if (laver && dp[ny][nx] > 1) continue;
-                if (!laver && dp[ny][nx] > 0) continue;
-
-                dp[ny][nx]++;
-                queue.push([nx, ny, maps[ny][nx] === 'L' ? true : laver, cnt + 1]);
+                // 레버를 당겼으면 레버 위치를 need에 넣어주고 이제 출구를 찾음
+                if(lArr[l[0]][l[1]]) {
+                    isL = true;
+                    need = [l];
+                    eArr[l[0]][l[1]] = lArr[l[0]][l[1]];
+                }
+            }
+        }else{
+            // 출구를 찾기 위함
+            for(let i = 0; i < 4; i++){
+                const [newR, newC] = [r+position[i][0], c+position[i][1]];
+                
+                if(newR < 0 || newC < 0 || newR >= row || newC >= column) continue;
+                if(!eArr[newR][newC] && maps[newR][newC] !== "X"){
+                    eArr[newR][newC] = eArr[r][c] + 1;
+                    need.push([newR, newC]);
+                }
+                
+                if(eArr[e[0]][e[1]]) {
+                    isE = true;
+                    need = [];
+                }
             }
         }
     }
 
-    // 도달할 수 없는 경우
-    return -1;
+    // 시작 칸을 1로 시작했으니, - 1
+    return eArr[e[0]][e[1]] ? eArr[e[0]][e[1]] - 1 : -1;
 }
