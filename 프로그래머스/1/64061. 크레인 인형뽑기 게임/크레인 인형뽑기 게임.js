@@ -1,4 +1,4 @@
-function solution(board, moves) {
+const solution = (board, moves) => {
     let reverseBoard = board.reverse();
     let newBoard = [[0]];
     let stack = [];
@@ -26,9 +26,9 @@ function solution(board, moves) {
     moves.map((v) => {
         // 위치에 인형이 있을 경우,
         // 위치 맨 위에 있는 인형을 stack에 넣은 후, pop하기
-        let vLast = newBoard[v].length-1;
-        let doll = newBoard[v][vLast]
-        if(doll!== undefined) {
+        let vLast = newBoard[v].length - 1;
+        let doll = newBoard[v][vLast];
+        if(doll !== undefined) {
             stack.push(doll);
             newBoard[v].pop();
         }
@@ -37,14 +37,12 @@ function solution(board, moves) {
         // 스택에 들어온 것과 이전 값이 같으면 cnt 2 증가 후, 두번 pop 하기
         let sLength = stack.length;
         
-        if(sLength>1 && stack[sLength-1] === stack[sLength-2]) {
-        
-            console.log(v, stack)
+        if(sLength > 1 && stack[sLength - 1] === stack[sLength - 2]) {
             cnt += 2;
             stack.pop();
             stack.pop();
         }
     })
-    return cnt;
     
+    return cnt;
 }
