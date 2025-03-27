@@ -1,25 +1,25 @@
 const solution = (progresses, speeds) => {
-    let canJob = []
+    let remain = []
     let cnt = 1;
     let ans = []
     
     for(let i = 0; i < progresses.length; i++){
         let lastPer = 100 - progresses[i];
-        canJob.push(Math.ceil(lastPer/speeds[i]));
+        remain.push(Math.ceil(lastPer/speeds[i]));
     }
     
-    let standard = canJob[0];
+    let standard = remain[0];
     
-    for(let i = 1; i < canJob.length; i++){
-        if(standard >= canJob[i]){
+    for(let i = 1; i < remain.length; i++){
+        if(standard >= remain[i]){
             cnt++;
-            if(i === canJob.length-1) ans.push(cnt);
+            if(i === remain.length-1) ans.push(cnt);
         }
         else{
             ans.push(cnt);
             cnt = 1;
-            standard = canJob[i];
-            if(i === canJob.length-1) ans.push(cnt);
+            standard = remain[i];
+            if(i === remain.length-1) ans.push(cnt);
         }
     }
     return ans;
