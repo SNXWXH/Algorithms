@@ -4,8 +4,7 @@ function solution(numbers, target) {
 
   const dfs = (count, sum) => {
     if (count === length) {
-      if (target === sum) 
-        answer++;
+      if (target === sum) answer++;
       return;
     }
 

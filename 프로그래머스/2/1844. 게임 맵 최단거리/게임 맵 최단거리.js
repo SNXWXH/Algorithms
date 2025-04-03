@@ -18,7 +18,6 @@ const solution = (maps) => {
             const nx = x+dx[i];
             const ny = y+dy[i];
             
-            
             if(nx >= 0 && nx < row && ny >= 0 && ny < col && maps[nx][ny] === 1 && visited[nx][ny] === 0){
                 visited[nx][ny] = 1;
                 queue.push([nx,ny, dist+1])
