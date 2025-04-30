@@ -2,6 +2,7 @@ const solution = (n, wires) => {
   let answer = Number.MAX_SAFE_INTEGER;
 
   const graph = Array.from(Array(n + 1), () => []);
+        console.log(graph)
 
   for (const wire of wires) {
     let [from, to] = wire;
