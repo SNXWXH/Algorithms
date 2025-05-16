@@ -9,6 +9,6 @@ const solution = (triangle) => {
     }
   }
 
+    
   return dp[0][0];
-
 }
