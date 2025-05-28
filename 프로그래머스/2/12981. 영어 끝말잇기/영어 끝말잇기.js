@@ -1,24 +1,24 @@
 const solution = (n, words) => {
-    let set = new Set();
-    set.add(words[0]);
+    let wordsArr = [];
+    wordsArr.push(words[0]);
 
     for (let i = 1; i < words.length; i++) {
-        let a = words[i - 1].slice(-1); 
-        let b = words[i][0]; 
+        let frontWord = words[i - 1].slice(-1); 
+        let backWord = words[i][0]; 
 
-        if (a !== b) {
+        if (frontWord !== backWord) {
             let number = (i % n) + 1;
             let time = Math.floor(i / n) + 1;
             return [number, time];
         }
 
-        if (set.has(words[i])) {
+        if (wordsArr.includes(words[i])) {
             let number = (i % n) + 1;
             let time = Math.floor(i / n) + 1;
             return [number, time];
         }
 
-        set.add(words[i]);
+        wordsArr.push(words[i]);
     }
 
     return [0, 0];
