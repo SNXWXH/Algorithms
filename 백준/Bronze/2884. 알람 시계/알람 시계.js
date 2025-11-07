@@ -1,13 +1,32 @@
-const file =
-process.platform === "linux" ? 0: "./input.txt";
+const file = process.platform === 'linux' ? 0 : './input.txt';
+let [H, M] = require('fs')
+  .readFileSync(file)
+  .toString()
+  .trim()
+  .split(' ')
+  .map(Number);
 
-const input = require("fs").readFileSync(file).toString().trim().split(" ");
+const culMin = (min) => {
+  if (min >= 60) {
+    let hour = parseInt(min / 60);
+    const left = min / 60;
 
-let H = Number(input[0]);
-let M = Number(input[1]);
+    M = left;
+    H += hour;
+  } else if (min < 0) {
+    H -= 1;
+    M = 60 + min;
+  } else M -= 45;
+};
 
-if(M-45>=0)
-	console.log(H+" "+(M-45));
-else {
-    if(H-1<0) H = H+24; console.log((H-1)+" "+(M+15));
-}
+const culHour = (hour) => {
+  if (hour >= 24) {
+    let left = hour / 24;
+    H = left;
+  } else if (hour < 0) H = 24 + hour;
+};
+
+culMin(M - 45);
+culHour(H);
+
+console.log(`${H} ${M}`);
