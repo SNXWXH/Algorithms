@@ -1,8 +1,8 @@
-const solution = (participant, completion) => {
-    participant.sort()
-    completion.sort()
+function solution(participant, completion) {
+    let participantSort = participant.sort()
+    let completionSort = completion.sort()
     
     for(let i = 0; i < participant.length; i++){
-        if(participant[i] !== completion[i]) return participant[i]
+        if(participantSort[i] !== completionSort[i]) return participantSort[i]
     }
 }
