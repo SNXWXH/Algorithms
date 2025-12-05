@@ -1,9 +1,12 @@
-const solution = (nums) => {
-  let numbers = [];
-
-  nums.forEach((e) => {
-    if (!numbers.includes(e)) numbers.push(e);
-  });
-
-  return nums.length / 2 > numbers.length ? numbers.length : nums.length / 2;
+function solution(nums) {
+    let numsObj = {};
+    
+    nums.forEach((num) => {
+        !numsObj[num] ? numsObj[num] = 1 : numsObj[num]++
+    })
+    
+    
+    return Object.keys(numsObj).length <= nums.length / 2 
+        ? Object.keys(numsObj).length
+        : nums.length / 2
 }
