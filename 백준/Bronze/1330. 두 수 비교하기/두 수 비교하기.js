@@ -1,14 +1,11 @@
-const file = 
-process.platform === "linux" ? "dev/stdin" : "./input.txt";
+const file = process.platform === 'linux' ? 0 : './input.txt';
+const [A, B] = require('fs')
+  .readFileSync(file)
+  .toString()
+  .trim()
+  .split(' ')
+  .map(Number);
 
-const input = require("fs").readFileSync(file).toString().trim().split(" ");
-
-const A = Number(input[0]);
-const B = Number(input[1]);
-
-if (A > B)
-    console.log(">");
-else if (A < B)
-    console.log("<");
-else
-    console.log("==");
+if (A > B) console.log('>');
+else if (A < B) console.log('<');
+else console.log('==');
