@@ -1,20 +1,12 @@
-const file = process.platform === "linux" ? 0 : "./input.txt";
-
-const input = require("fs")
+const file = process.platform === 'linux' ? 0 : './input.txt';
+const numberArray = require('fs')
   .readFileSync(file)
   .toString()
   .trim()
-  .split("\n")
-  .map((el) => Number(el));
+  .split('\n')
+  .map(Number);
 
-let max = input[0];
-let n = 0;
+const maxNum = Math.max(...numberArray);
+const numIdx = numberArray.indexOf(maxNum) + 1;
 
-for (let i = 0; i < 9; i++) {
-  if (input[i] > max) {
-    max = input[i];
-    n = i;
-  }
-}
-
-console.log(max + "\n" + (n + 1));
+console.log(maxNum + '\n' + numIdx);
