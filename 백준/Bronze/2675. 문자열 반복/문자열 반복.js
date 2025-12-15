@@ -1,14 +1,14 @@
-let fs = require('fs');
-let input = fs.readFileSync('/dev/stdin').toString().split('\n');
-let testCase = Number(input[0]);
+const file = process.platform === 'linux' ? 0 : './input.txt';
+const input = require('fs').readFileSync(file).toString().trim().split('\n');
 
-for (let i = 1; i <= testCase; i++) {
-    let [r, s] = input[i].split(" ");
-    let result = "";
-    // 현재 문자열의 각 문자를 하나씩 확인하며 
-    for (let j = 0; j <= s.length; j++) {
-    // r번 반복한 문자열을 뒤에 이어붙이기
-    result += s.charAt(j).repeat(r); 
-    }
-  console.log(result);
+let ans = [];
+
+for (let i = 1; i < input.length; i++) {
+  const [num, str] = input[i].split(' ');
+  let P = '';
+  const splitStr = str.split('');
+  splitStr.forEach((v) => (P += v.repeat(+num)));
+  ans.push(P);
 }
+
+console.log(ans.join('\n'));
