@@ -1,17 +1,11 @@
-const file = process.platform === 'linux' ? 0 : './input.txt';
-let [n, ...input] = require('fs')
+const file = process.platform === 'linux' ? 0 : './INPUT.txt';
+const [N, INPUT, V] = require('fs')
   .readFileSync(file)
   .toString()
   .trim()
   .split('\n');
 
-let arr = input[0];
-let num = input[1];
+const NUMARR = INPUT.split(' ').map(Number);
+const ANS = NUMARR.filter((num) => num === +V);
 
-let ans = 0;
-
-arr.split(' ').map((v) => {
-  if (+v === +num) ans++;
-});
-
-console.log(ans);
+console.log(ANS.length);
