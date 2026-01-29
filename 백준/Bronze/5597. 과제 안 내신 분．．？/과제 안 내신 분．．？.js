@@ -1,16 +1,16 @@
-const file = process.platform === 'linux' ? 0 : './input.txt';
-const student = require('fs')
+const file = process.platform === 'linux' ? 0 : './INPUT.txt';
+const INPUT = require('fs')
   .readFileSync(file)
   .toString()
   .trim()
   .split('\n')
   .map(Number);
 
-let arrNum = [];
+const NUM = [];
 for (let i = 1; i <= 30; i++) {
-  arrNum.push(i);
+  NUM.push(i);
 }
 
-const ans = arrNum.filter((v) => !student.includes(v));
+const ANS = NUM.filter((num) => !INPUT.includes(num));
 
-console.log(ans.join('\n'));
+console.log(ANS.join('\n'));
