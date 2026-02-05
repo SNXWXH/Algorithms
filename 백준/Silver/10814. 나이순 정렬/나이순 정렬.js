@@ -1,12 +1,16 @@
-const file = process.platform === 'linux' ? 0 : './input.txt';
-const [n, ...input] = require('fs')
+const file = process.platform === 'linux' ? 0 : './INPUT.txt';
+const [N, ...INPUT] = require('fs')
   .readFileSync(file)
   .toString()
   .trim()
   .split('\n');
 
-let inputArr = input.map((v) => v.split(' '));
-let sortArr = inputArr.sort((a, b) => a[0] - b[0]);
+const USER = INPUT.map((v) => v.split(' '));
 
-let ans = sortArr.map((v) => v.join(' '));
-console.log(ans.join('\n'));
+const SORT_USER = USER.sort((userA, userB) => {
+  if (userA[0] === userB[0]) return userA[0] - userB[0];
+  return userA[0] - userB[0];
+});
+
+const ANS = SORT_USER.map((v) => v.join(' '));
+console.log(ANS.join('\n'));
