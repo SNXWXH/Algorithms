@@ -1,17 +1,17 @@
-const file = process.platform === 'linux' ? 0 : './input.txt';
-const [n, input] = require('fs')
+const file = process.platform === 'linux' ? 0 : './INPUT.txt';
+const [N, INPUT] = require('fs')
   .readFileSync(file)
   .toString()
   .trim()
   .split('\n');
 
-let inputArr = input.split(' ').map(Number);
-let setArr = [...new Set(inputArr)].sort((a, b) => a - b);
+const NUM = INPUT.split(' ').map(Number);
+const SORT_NUM = [...new Set(NUM)].sort((a, b) => a - b);
 
-let dic = {};
-setArr.map((v, i) => (dic[v] = i));
+const OBJ = {};
+SORT_NUM.map((v, i) => (OBJ[v] = i));
 
 let ans = '';
-inputArr.map((v) => (ans += dic[v] + ' '));
+NUM.map((v) => (ans += OBJ[v] + ' '));
 
 console.log(ans);
