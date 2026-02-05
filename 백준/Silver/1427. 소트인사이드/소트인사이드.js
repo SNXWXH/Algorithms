@@ -1,5 +1,4 @@
-const file = process.platform === 'linux' ? 0 : './input.txt';
-const input = require('fs').readFileSync(file).toString().trim().split('');
+const file = process.platform === 'linux' ? 0 : './INPUT.txt';
+const NUM = require('fs').readFileSync(file).toString().trim().split('');
 
-let ans = input.sort((a, b) => b - a).join('');
-console.log(ans);
+console.log(NUM.sort((a, b) => b - a).join(''));
