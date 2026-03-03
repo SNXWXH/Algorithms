@@ -1,13 +1,21 @@
-const file = process.platform === 'linux' ? 0 : './input.txt';
-const input = require('fs').readFileSync(file).toString().trim().split('\n');
+const file = process.platform === 'linux' ? 0 : './INPUT.txt';
+const [FIRST, ...INPUT] = require('fs')
+  .readFileSync(file)
+  .toString()
+  .trim()
+  .split('\n');
 
-let [, K] = input.shift().split(' ').map(Number);
-const coins = input.map(Number).sort((a, b) => b - a);
-let cnt = 0;
+const MONEY = INPUT.sort((a, b) => b - a).map(Number);
+let [n, k] = FIRST.split(' ').map(Number);
+let ans = 0;
 
-for (const coin of coins) {
-  cnt += Math.floor(K / coin);
-  K %= coin;
-}
+MONEY.forEach((money) => {
+  let coin = k / money;
 
-console.log(cnt);
+  if (coin >= 1) {
+    ans += parseInt(k / money);
+    k = k % money;
+  }
+});
+
+console.log(ans);
