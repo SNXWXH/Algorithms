@@ -1,22 +1,21 @@
-const file = process.platform === 'linux' ? 0 : './input.txt';
-const [n, input] = require('fs')
+const file = process.platform === 'linux' ? 0 : './INPUT.txt';
+const [N, NUMBER] = require('fs')
   .readFileSync(file)
   .toString()
   .trim()
   .split('\n');
 
-let culTime = [];
-let before = 0;
+const P = NUMBER.split(' ').map(Number);
+const TIME_SUM = [];
 
-let time = input
-  .split(' ')
-  .sort((a, b) => a - b)
-  .map(Number);
+const SORT_P = P.sort((a, b) => a - b);
 
-for (let n of time) {
-  before += n;
-  culTime.push(before);
-}
+SORT_P.reduce((acc, cur) => {
+  const sum = acc + cur;
+  TIME_SUM.push(sum);
+  return sum;
+}, 0);
 
-let ans = culTime.reduce((acc, cur) => acc + cur);
-console.log(ans);
+const ANS = TIME_SUM.reduce((acc, cur) => (acc += cur));
+
+console.log(ANS);
