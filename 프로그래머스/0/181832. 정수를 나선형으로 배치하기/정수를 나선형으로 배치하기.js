@@ -1,0 +1,30 @@
+function solution(n) {
+  const arr = Array.from({ length: n }, () => Array(n).fill(0));
+
+  const dx = [0, 1, 0, -1];
+  const dy = [1, 0, -1, 0];
+
+  let x = 0, y = 0, dir = 0;
+
+  for (let num = 1; num <= n * n; num++) {
+    arr[x][y] = num;
+
+    let nx = x + dx[dir];
+    let ny = y + dy[dir];
+
+    if (
+      nx < 0 || ny < 0 ||
+      nx >= n || ny >= n ||
+      arr[nx][ny] !== 0
+    ) {
+      dir = (dir + 1) % 4;
+      nx = x + dx[dir];
+      ny = y + dy[dir];
+    }
+
+    x = nx;
+    y = ny;
+  }
+
+  return arr;
+}
